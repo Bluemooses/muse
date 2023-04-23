@@ -26,13 +26,13 @@ type PostWithUser = RouterOutputs["posts"]["getAll"][number];
 const PostView = (props: PostWithUser) => {
   const { post, author } = props;
   return (
-    <div className="border-b border-slate-400 p-8" key={post.id}>
+    <div className="gap-3 border-b border-slate-400 p-8" key={post.id}>
       <img src={author?.profileImageUrl} className="h-12 w-12 rounded-full" />
       <div className="flex flex-col">
         <div className="flex">
           <span>{author?.username}</span>
         </div>
-        {post.content}
+        <span>{post.content}</span>
       </div>
     </div>
   );
@@ -40,7 +40,7 @@ const PostView = (props: PostWithUser) => {
 
 const Home: NextPage = () => {
   const user = useUser();
-
+  console.log(user);
   const { data, isLoading } = api.posts.getAll.useQuery();
 
   if (!data) {
