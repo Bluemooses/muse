@@ -6,7 +6,6 @@ import { number } from "zod";
 
 const CreatePostWizard = () => {
   const { user } = useUser();
-  console.log(user?.id);
   if (!user) return null;
   return (
     <div className="flex w-full gap-3">
