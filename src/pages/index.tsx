@@ -6,9 +6,8 @@ import { number } from "zod";
 
 const CreatePostWizard = () => {
   const { user } = useUser();
-
+  console.log(user?.id);
   if (!user) return null;
-  console.log(user);
   return (
     <div className="flex w-full gap-3">
       <img
@@ -29,7 +28,13 @@ const PostView = (props: PostWithUser) => {
   const { post, author } = props;
   return (
     <div className="border-b border-slate-400 p-8" key={post.id}>
-      {post.content}
+      <img src={author?.profileImageUrl} className="h-12 w-12 rounded-full" />
+      <div className="flex flex-col">
+        <div className="flex">
+          <span>{author?.username}</span>
+        </div>
+        {post.content}
+      </div>
     </div>
   );
 };
@@ -38,9 +43,6 @@ const Home: NextPage = () => {
   const user = useUser();
 
   const { data, isLoading } = api.posts.getAll.useQuery();
-  // if (!data || isLoading)
-
-  // if(isLoading) { return <div>Loading...</div>}
 
   if (!data) {
     return <div>Loading...</div>;
